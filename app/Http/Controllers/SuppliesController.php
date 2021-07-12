@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product_Category;
 
 class SuppliesController extends Controller
 {
@@ -13,7 +14,11 @@ class SuppliesController extends Controller
      */
     public function index()
     {
-        //
+        $category = Product_Category::all();
+
+        return view('category', [
+            'category' => $category,
+        ]);
     }
 
     /**

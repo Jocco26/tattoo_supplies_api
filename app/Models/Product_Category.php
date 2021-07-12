@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product_Category extends Model
 {
-    use HasFactory;
+    protected $table = 'product_category';//use to overide the name of the table being used in the db
+    protected $fillable = [
+        'name'
+    ];//declare what column can be filled in the table
+    use HasFactory; 
 }
