@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    
     <style>
         .form{
             margin-top: 50px;
@@ -19,20 +18,40 @@
 </head>
 <body>
     <div>    
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-        <a class="navbar-brand" href="#">New Category</a>
-        </div>
-    </nav>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container">
+            <a class="navbar-brand" href="#">New Product</a>
+            </div>
+        </nav>
     </div>
 
-        <div class="container form">
-        <form action={{route('add_category')}} method="post">
+    <div class="container form">
+        <form action={{route('add_product')}} method="post" enctype="multipart/form-data">
             <div class="form-group">
-              <label for="cat_name">Category Name</label>
-              <input type="text" name="name" class="form-control" id="cat_name">
-              
+              <label for="cat_name">Product Name</label>
+              <input id="cat_name" type="text" name="name" class="form-control" >
             </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" class="form-control" name="description"  rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="product_category">Category</label>
+                <select id="product_category" class="form-control" name="category">
+                  @foreach ($category as $category)
+                    <option value={{ $category->id }}>{{ $category->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+            <div class="form-group">
+                <label for="img">Image</label>
+                <input id="img" type="file" name="image" class="form-control-file" >
+            </div>
+              
+            
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

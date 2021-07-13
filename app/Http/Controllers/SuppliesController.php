@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product_Category;
+use App\Models\Product;
 
 class SuppliesController extends Controller
 {
@@ -21,10 +22,28 @@ class SuppliesController extends Controller
         ]);
     }
 
+    public function showProducts()
+    {
+        $products = Product::all();
+
+        return view('products', [
+            'products' => $products,
+        ]);
+    }
+
+
     public function newCategory()
     {
-
         return view('newcategory');
+    }
+
+    public function newProduct()
+    {
+        $category = Product_Category::all();
+
+        return view('newproduct', [
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -56,6 +75,28 @@ class SuppliesController extends Controller
 
         return view('newcategory');
         }
+    }
+
+    public function storeProduct(Request $request, Product $product)
+    {
+        $data = [];
+
+        if($request->hasFile('image'))
+        {
+            $destination_path = 'public/images/products';
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $path = $request->file('image')->storeAs($destination_path,$image_name);
+
+            $data['image'] = $image_name;
+            $data['name'] = $request->input('name');
+            $data['description'] = $request->input('description');
+            $data['category_id'] = $request->input('category');
+            
+            $product->insert($data);
+        }
+
+        
     }
 
     /**
