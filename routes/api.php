@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/categories', 'App\Http\Controllers\SuppliesController@index');
+Route::get('/categories/new', 'App\Http\Controllers\SuppliesController@newCategory')->name('new_category');
+Route::post('/categories/new', 'App\Http\Controllers\SuppliesController@store')->name('add_category');

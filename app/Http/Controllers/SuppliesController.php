@@ -21,6 +21,12 @@ class SuppliesController extends Controller
         ]);
     }
 
+    public function newCategory()
+    {
+
+        return view('newcategory');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +34,7 @@ class SuppliesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -37,9 +43,19 @@ class SuppliesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product_Category $category)
     {
-        //
+        $data = [];
+
+        //storing each html input value into $data array
+        $data['name'] = $request->input('name');
+
+        if( $request->isMethod('post'))//if the call is using the post it is a create client
+        {
+        $category->insert($data);
+
+        return view('newcategory');
+        }
     }
 
     /**
