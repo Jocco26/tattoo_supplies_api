@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product_Category;
 use App\Models\Product;
+use App\Http\Resources\Products as ProductResource;
 
 class SuppliesController extends Controller
 {
@@ -13,6 +14,12 @@ class SuppliesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function apiIndex()
+    {
+        $products = Product::orderBy('created_at', 'desc')->paginate(5);
+
+        return ProductResource::collection($products);
+    }
     public function index()
     {
         $category = Product_Category::all();

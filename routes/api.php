@@ -25,3 +25,6 @@ Route::post('/categories/new', 'App\Http\Controllers\SuppliesController@store')-
 Route::get('/products', 'App\Http\Controllers\SuppliesController@showProducts');
 Route::get('/products/new', 'App\Http\Controllers\SuppliesController@newProduct')->name('new_product');
 Route::post('/products/new', 'App\Http\Controllers\SuppliesController@storeProduct')->name('add_product');
+
+//for vue component
+Route::get('/products02', 'App\Http\Controllers\SuppliesController@apiIndex');
