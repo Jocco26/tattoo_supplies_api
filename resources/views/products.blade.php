@@ -45,7 +45,6 @@
               @endforeach
             </tbody>
           </table>
-          <button type="button" class="btn btn-dark" onclick="window.location='{{ URL::route('new_category'); }}'">Add Category</button>
           <button type="button" class="btn btn-dark" onclick="window.location='{{ URL::route('new_product'); }}'">Add Product</button>
     </div>
 
