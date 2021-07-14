@@ -1862,7 +1862,8 @@ __webpack_require__.r(__webpack_exports__);
       product: {
         id: '',
         title: '',
-        description: ''
+        description: '',
+        image: ''
       },
       product_id: '',
       pagination: {},
@@ -37544,7 +37545,9 @@ var render = function() {
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(product.description))]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(product.image))])
+          _c("img", {
+            attrs: { src: "/storage/images/products/" + product.image }
+          })
         ])
       })
     ],

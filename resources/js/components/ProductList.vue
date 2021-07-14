@@ -4,7 +4,7 @@
         <div class="card card-body" v-for="product in products" v-bind:key="product.id">
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
-            <p>{{ product.image }}</p>
+            <img :src="'/storage/images/products/' + product.image">
         </div>
     </div>
 </template>
@@ -16,7 +16,8 @@
                 product:{
                     id:'',
                     title:'',
-                    description:''
+                    description:'',
+                    image:''
                 },
                 product_id:'',
                 pagination:{},
