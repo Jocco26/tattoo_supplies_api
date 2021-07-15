@@ -1875,6 +1875,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1916,6 +1918,23 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: links.prev
       };
       this.pagination = pagination;
+    },
+    deleteProduct: function deleteProduct(id) {
+      var _this2 = this;
+
+      if (confirm('Are you sure')) {
+        fetch("api/products02/".concat(id), {
+          method: 'delete'
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          alert('Product Removed');
+
+          _this2.fetchProducts();
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     }
   }
 });
@@ -38088,7 +38107,22 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", { staticClass: "card-text" }, [
                     _vm._v(_vm._s(product.description))
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteProduct(product.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
                 ])
               ])
             ])

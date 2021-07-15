@@ -22,6 +22,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>
+                    <hr>
+                    <button @click="deleteProduct(product.id)" class="btn btn-danger">Delete</button>
                 </div>
                 </div>
             </div>
@@ -70,6 +72,19 @@
                 }
 
                 this.pagination = pagination;
+            },
+            deleteProduct(id){
+                if(confirm('Are you sure')){
+                    fetch(`api/products02/${id}`, {
+                        method:'delete'
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert('Product Removed');
+                        this.fetchProducts(); 
+                    })
+                    .catch(err => console.log(err));
+                }
             }
         }
     };

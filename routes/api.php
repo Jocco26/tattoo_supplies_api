@@ -27,4 +27,9 @@ Route::get('/products/new', 'App\Http\Controllers\SuppliesController@newProduct'
 Route::post('/products/new', 'App\Http\Controllers\SuppliesController@storeProduct')->name('add_product');
 
 //for vue component
+
+//showing product list
 Route::get('/products02', 'App\Http\Controllers\SuppliesController@apiIndex');
+
+//deleting product
+Route::delete('/products02/{id}', 'App\Http\Controllers\SuppliesController@destroy');

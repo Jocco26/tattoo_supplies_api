@@ -148,6 +148,11 @@ class SuppliesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Get product
+        $product = Product::findOrFail($id);
+
+        if($product->delete()) {
+            return new ProductResource($product);
+        }   
     }
 }
