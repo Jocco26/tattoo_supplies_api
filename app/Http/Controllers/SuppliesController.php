@@ -16,7 +16,7 @@ class SuppliesController extends Controller
      */
     public function apiIndex()
     {
-        $products = Product::orderBy('created_at', 'desc')->paginate(5);
+        $products = Product::orderBy('created_at', 'desc')->paginate(1);
 
         return ProductResource::collection($products);
     }

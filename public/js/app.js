@@ -1872,6 +1872,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38008,7 +38011,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
-                      return _vm.fetchArticles(_vm.pagination.prev_page_url)
+                      return _vm.fetchProducts(_vm.pagination.prev_page_url)
                     }
                   }
                 },
@@ -38016,6 +38019,21 @@ var render = function() {
               )
             ]
           ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "\n                Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c(
             "li",
@@ -38031,7 +38049,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
-                      return _vm.fetchArticles(_vm.pagination.prev_page_url)
+                      return _vm.fetchProducts(_vm.pagination.next_page_url)
                     }
                   }
                 },
