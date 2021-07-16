@@ -1995,6 +1995,7 @@ __webpack_require__.r(__webpack_exports__);
     addProduct: function addProduct() {
       if (this.edit === false) {
         var fd = new FormData();
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/products/new");
       }
     }
   }

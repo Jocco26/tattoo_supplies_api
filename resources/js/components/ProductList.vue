@@ -141,6 +141,7 @@ import axios from 'axios';
             addProduct(){
                 if(this.edit === false){
                     let fd = new FormData();
+                    axios.post("api/products/new")
 
                 }
             }
