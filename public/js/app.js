@@ -1877,6 +1877,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1887,6 +1918,11 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         image: ''
       },
+      categories: [],
+      category: {
+        id: '',
+        name: ''
+      },
       product_id: '',
       pagination: {},
       edit: false
@@ -1894,6 +1930,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.fetchProducts();
+    this.fetchCategory();
   },
   methods: {
     fetchProducts: function fetchProducts(page_url) {
@@ -1910,6 +1947,17 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
+    fetchCategory: function fetchCategory() {
+      var _this2 = this;
+
+      fetch('api/categories02').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this2.categories = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
     makePagination: function makePagination(meta, links) {
       var pagination = {
         current_page: meta.current_page,
@@ -1920,7 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
       this.pagination = pagination;
     },
     deleteProduct: function deleteProduct(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (confirm('Are you sure')) {
         fetch("api/products02/".concat(id), {
@@ -1930,7 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (data) {
           alert('Product Removed');
 
-          _this2.fetchProducts();
+          _this3.fetchProducts();
         })["catch"](function (err) {
           return console.log(err);
         });
@@ -6482,7 +6530,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg{\n    width: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nimg{\n    width: 50%;\n}\n.form{\n    margin-top: 50px;\n    margin-bottom: 50px;\n}\n.form button{\n    margin-top: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38014,6 +38062,48 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", { staticClass: "container form" }, [
+        _c(
+          "form",
+          { attrs: { method: "post", enctype: "multipart/form-data" } },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "product_category" } }, [
+                _vm._v("Category")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { id: "product_category", name: "category" }
+                },
+                _vm._l(_vm.categories, function(category) {
+                  return _c(
+                    "option",
+                    { key: category.id, domProps: { value: category.id } },
+                    [_vm._v(_vm._s(category.name))]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Submit")]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
       _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
         _c("ul", { staticClass: "pagination" }, [
           _c(
@@ -38133,7 +38223,47 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "cat_name" } }, [_vm._v("Product Name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { id: "cat_name", type: "text", name: "name" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { id: "description", name: "description", rows: "3" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "img" } }, [_vm._v("Image")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control-file",
+        attrs: { id: "img", type: "file", name: "image" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

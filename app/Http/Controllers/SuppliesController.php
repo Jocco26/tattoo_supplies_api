@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product_Category;
 use App\Models\Product;
 use App\Http\Resources\Products as ProductResource;
+use App\Http\Resources\Product_Category as CategoryResource;
 
 class SuppliesController extends Controller
 {
@@ -20,6 +21,14 @@ class SuppliesController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    public function apiCategories()
+    {
+        $category = Product_Category::all();
+
+        return CategoryResource::collection($category);
+    }
+
     public function index()
     {
         $category = Product_Category::all();

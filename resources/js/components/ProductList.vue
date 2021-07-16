@@ -1,5 +1,36 @@
 <template>
     <div>
+        <div class="container form">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="cat_name">Product Name</label>
+              <input id="cat_name" type="text" name="name" class="form-control" >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" class="form-control" name="description"  rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="product_category">Category</label>
+                <select id="product_category" class="form-control" name="category">
+                        <option v-for="category in categories" v-bind:key="category.id" :value="category.id">{{ category.name }}</option>
+                </select>
+              </div>
+
+            <div class="form-group">
+                <label for="img">Image</label>
+                <input id="img" type="file" name="image" class="form-control-file" >
+            </div>
+              
+            
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+      
+
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
@@ -41,6 +72,11 @@
                     description:'',
                     image:''
                 },
+                categories:[],
+                category:{
+                    id:'',
+                    name:''   
+                },
                 product_id:'',
                 pagination:{},
                 edit:false
@@ -49,6 +85,7 @@
 
         created(){
             this.fetchProducts();
+            this.fetchCategory();
         },
 
         methods:{
@@ -60,6 +97,14 @@
                 .then(res => {
                     this.products = res.data;
                     vm.makePagination(res.meta, res.links);
+                })
+                .catch(err => console.log(err));
+            },
+            fetchCategory(){
+                fetch('api/categories02')
+                .then(res => res.json())
+                .then(res => {
+                    this.categories = res.data;
                 })
                 .catch(err => console.log(err));
             },
@@ -92,5 +137,14 @@
 <style>
         img{
             width: 50%;
+        }
+
+        .form{
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .form button{
+            margin-top: 20px;
         }
     </style>
