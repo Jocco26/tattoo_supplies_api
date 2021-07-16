@@ -1,15 +1,15 @@
 <template>
     <div>
         <div class="container form">
-        <form method="post" enctype="multipart/form-data">
+        <form @submit.prevent="addProduct" enctype="multipart/form-data">
             <div class="form-group">
               <label for="cat_name">Product Name</label>
-              <input id="cat_name" type="text" name="name" class="form-control" >
+              <input id="cat_name" type="text" name="name" class="form-control" v-model="product.name">
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" class="form-control" name="description"  rows="3"></textarea>
+                <textarea id="description" class="form-control" name="description"  rows="3" v-model="product.description"></textarea>
             </div>
 
             <div class="form-group">
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <label for="img">Image</label>
-                <input id="img" type="file" name="image" class="form-control-file" >
+                <input id="img" type="file" name="image" class="form-control-file" @change="onChange">
             </div>
               
             
@@ -62,13 +62,15 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
     export default{
         data() {
             return{
                 products:[],
                 product:{
                     id:'',
-                    title:'',
+                    name:'',
                     description:'',
                     image:''
                 },
@@ -108,6 +110,11 @@
                 })
                 .catch(err => console.log(err));
             },
+            onChange(e){
+                //console.log("selected file", e.target.files[0]);
+                this.image = e.target.files[0];
+                console.log(this.image);
+            },
             makePagination(meta, links){
                 let pagination = {
                     current_page: meta.current_page,
@@ -130,10 +137,16 @@
                     })
                     .catch(err => console.log(err));
                 }
+            },
+            addProduct(){
+                if(this.edit === false){
+                    let fd = new FormData();
+
+                }
             }
         }
     };
-</script>
+</script>   
 <style>
         img{
             width: 50%;

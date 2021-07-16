@@ -1845,6 +1845,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1908,13 +1910,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       products: [],
       product: {
         id: '',
-        title: '',
+        name: '',
         description: '',
         image: ''
       },
@@ -1958,6 +1961,11 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
+    onChange: function onChange(e) {
+      //console.log("selected file", e.target.files[0]);
+      this.image = e.target.files[0];
+      console.log(this.image);
+    },
     makePagination: function makePagination(meta, links) {
       var pagination = {
         current_page: meta.current_page,
@@ -1982,6 +1990,11 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (err) {
           return console.log(err);
         });
+      }
+    },
+    addProduct: function addProduct() {
+      if (this.edit === false) {
+        var fd = new FormData();
       }
     }
   }
@@ -38065,11 +38078,71 @@ var render = function() {
       _c("div", { staticClass: "container form" }, [
         _c(
           "form",
-          { attrs: { method: "post", enctype: "multipart/form-data" } },
+          {
+            attrs: { enctype: "multipart/form-data" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.addProduct.apply(null, arguments)
+              }
+            }
+          },
           [
-            _vm._m(0),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "cat_name" } }, [
+                _vm._v("Product Name")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.name,
+                    expression: "product.name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "cat_name", type: "text", name: "name" },
+                domProps: { value: _vm.product.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.product, "name", $event.target.value)
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "description" } }, [
+                _vm._v("Description")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.description,
+                    expression: "product.description"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "description", name: "description", rows: "3" },
+                domProps: { value: _vm.product.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.product, "description", $event.target.value)
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", { attrs: { for: "product_category" } }, [
@@ -38093,7 +38166,15 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(2),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "img" } }, [_vm._v("Image")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control-file",
+                attrs: { id: "img", type: "file", name: "image" },
+                on: { change: _vm.onChange }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "button",
@@ -38223,47 +38304,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "cat_name" } }, [_vm._v("Product Name")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { id: "cat_name", type: "text", name: "name" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "description", name: "description", rows: "3" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "img" } }, [_vm._v("Image")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control-file",
-        attrs: { id: "img", type: "file", name: "image" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
