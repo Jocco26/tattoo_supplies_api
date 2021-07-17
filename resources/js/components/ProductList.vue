@@ -14,8 +14,9 @@
 
             <div class="form-group">
                 <label for="product_category">Category</label>
-                <select id="product_category" class="form-control" name="category">
-                        <option v-for="category in categories" v-bind:key="category.id" :value="category.id">{{ category.name }}</option>
+                <select id="product_category" class="form-control" name="category" @change="getValue($event)">
+                        <option value="null" selected disabled>Select a Category</option>
+                        <option id="category_id" v-for="category in categories" v-bind:key="category.id" :value="category.id">{{ category.name }}</option>
                 </select>
               </div>
 
@@ -72,6 +73,7 @@ import axios from 'axios';
                     id:'',
                     name:'',
                     description:'',
+                    category_id:'',
                     image:''
                 },
                 categories:[],
@@ -113,7 +115,13 @@ import axios from 'axios';
             onChange(e){
                 //console.log("selected file", e.target.files[0]);
                 this.image = e.target.files[0];
+
                 console.log(this.image);
+            },
+            getValue(event){
+                this.category_id = event.target.value;
+                console.log(this.category_id)
+                
             },
             makePagination(meta, links){
                 let pagination = {
@@ -139,10 +147,24 @@ import axios from 'axios';
                 }
             },
             addProduct(){
+               
                 if(this.edit === false){
-                    let fd = new FormData();
-                    axios.post("api/products/new")
+                    
+                    //console.log(this.product.name);
+                    //console.log(this.product.description);
+                   // console.log(this.category_id);
+                    //console.log(this.image);
 
+                    let data = new FormData();
+                    data.append('name', this.product.name);
+                    data.append('description', this.product.description);
+                    data.append('category_id', this.category_id);
+                    data.append('image', this.image);
+
+                    axios.post("api/products02/new",data).then(res=>{
+                        console.log("Response", res.data)
+                    }).catch(err=>console.log(err))
+                    
                 }
             }
         }
@@ -150,7 +172,7 @@ import axios from 'axios';
 </script>   
 <style>
         img{
-            width: 50%;
+            width: 80%;
         }
 
         .form{

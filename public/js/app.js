@@ -1910,6 +1910,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -1919,6 +1920,7 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: '',
         description: '',
+        category_id: '',
         image: ''
       },
       categories: [],
@@ -1966,6 +1968,10 @@ __webpack_require__.r(__webpack_exports__);
       this.image = e.target.files[0];
       console.log(this.image);
     },
+    getValue: function getValue(event) {
+      this.category_id = event.target.value;
+      console.log(this.category_id);
+    },
     makePagination: function makePagination(meta, links) {
       var pagination = {
         current_page: meta.current_page,
@@ -1994,8 +2000,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     addProduct: function addProduct() {
       if (this.edit === false) {
-        var fd = new FormData();
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/products/new");
+        //console.log(this.product.name);
+        //console.log(this.product.description);
+        // console.log(this.category_id);
+        //console.log(this.image);
+        var data = new FormData();
+        data.append('name', this.product.name);
+        data.append('description', this.product.description);
+        data.append('category_id', this.category_id);
+        data.append('image', this.image);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/products02/new", data).then(function (res) {
+          console.log("Response", res.data);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
       }
     }
   }
@@ -6544,7 +6562,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg{\n    width: 50%;\n}\n.form{\n    margin-top: 50px;\n    margin-bottom: 50px;\n}\n.form button{\n    margin-top: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nimg{\n    width: 80%;\n}\n.form{\n    margin-top: 50px;\n    margin-bottom: 50px;\n}\n.form button{\n    margin-top: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38154,16 +38172,33 @@ var render = function() {
                 "select",
                 {
                   staticClass: "form-control",
-                  attrs: { id: "product_category", name: "category" }
+                  attrs: { id: "product_category", name: "category" },
+                  on: {
+                    change: function($event) {
+                      return _vm.getValue($event)
+                    }
+                  }
                 },
-                _vm._l(_vm.categories, function(category) {
-                  return _c(
+                [
+                  _c(
                     "option",
-                    { key: category.id, domProps: { value: category.id } },
-                    [_vm._v(_vm._s(category.name))]
-                  )
-                }),
-                0
+                    { attrs: { value: "null", selected: "", disabled: "" } },
+                    [_vm._v("Select a Category")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories, function(category) {
+                    return _c(
+                      "option",
+                      {
+                        key: category.id,
+                        attrs: { id: "category_id" },
+                        domProps: { value: category.id }
+                      },
+                      [_vm._v(_vm._s(category.name))]
+                    )
+                  })
+                ],
+                2
               )
             ]),
             _vm._v(" "),

@@ -115,6 +115,35 @@ class SuppliesController extends Controller
         
     }
 
+    public function storeProductApi(Request $request, Product $product)
+    {
+
+      
+       $data = [];
+        try{
+            if($request->hasFile('image')){
+                
+                $file = $request->file('image');
+                $file_name = $file->getClientOriginalName();
+                $file->move(storage_path('app/public/images/products'), $file_name);
+
+                $data['image'] = $file_name;
+                $data['name'] = $request->input('name');
+                $data['description'] = $request->input('description');
+                $data['category_id'] = $request->input('category_id');
+
+          
+                $product->insert($data);
+           
+            }
+        }catch(\Exception $e){
+                return response()->json([
+                    'message'=>$e->getMessage()
+                ]);
+            }
+        }
+    
+
     /**
      * Display the specified resource.
      *

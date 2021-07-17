@@ -31,6 +31,8 @@ Route::post('/products/new', 'App\Http\Controllers\SuppliesController@storeProdu
 //showing product list
 Route::get('/products02', 'App\Http\Controllers\SuppliesController@apiIndex');
 Route::get('/categories02', 'App\Http\Controllers\SuppliesController@apiCategories');
+Route::post('/products02/new', 'App\Http\Controllers\SuppliesController@storeProductApi');
+
 
 //deleting product
 Route::delete('/products02/{id}', 'App\Http\Controllers\SuppliesController@destroy');
