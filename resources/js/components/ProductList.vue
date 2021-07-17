@@ -55,6 +55,7 @@
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>
                     <hr>
+                    <button @click="editProduct(product)" class="btn btn-warning">Edit</button>
                     <button @click="deleteProduct(product.id)" class="btn btn-danger">Delete</button>
                 </div>
                 </div>
