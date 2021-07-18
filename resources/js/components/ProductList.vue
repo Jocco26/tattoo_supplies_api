@@ -150,11 +150,6 @@ import axios from 'axios';
             addProduct(){
                
                 if(this.edit === false){
-                    
-                    //console.log(this.product.name);
-                    //console.log(this.product.description);
-                   // console.log(this.category_id);
-                    //console.log(this.image);
 
                     let data = new FormData();
                     data.append('name', this.product.name);
@@ -166,6 +161,18 @@ import axios from 'axios';
                         console.log("Response", res.data)
                     }).catch(err=>console.log(err))
                     
+                }else{
+                    let data = new FormData();
+                    data.append('name', this.product.name);
+                    data.append('description', this.product.description);
+                    data.append('category_id', this.category_id);
+                    data.append('product_id', this.product.product_id);
+                    data.append('image', this.image);
+                    
+                    console.log(this.product.product_id)
+                    axios.put("api/products02/new",data).then(res=>{
+                        console.log("Response", res.data)
+                    }).catch(err=>console.log(err))
                 }
             },
             editProduct(product){
@@ -175,6 +182,8 @@ import axios from 'axios';
                 this.product.name = product.name;
                 this.product.description = product.description;
                 document.getElementById('product_category').selectedIndex=product.category_id;
+                console.log(this.product.id)
+                console.log(this.product.product_id)
 
             }
         }

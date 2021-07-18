@@ -32,6 +32,7 @@ Route::post('/products/new', 'App\Http\Controllers\SuppliesController@storeProdu
 Route::get('/products02', 'App\Http\Controllers\SuppliesController@apiIndex');
 Route::get('/categories02', 'App\Http\Controllers\SuppliesController@apiCategories');
 Route::post('/products02/new', 'App\Http\Controllers\SuppliesController@storeProductApi');
+Route::put('/products02/new', 'App\Http\Controllers\SuppliesController@storeProductApi');
 
 
 //deleting product
