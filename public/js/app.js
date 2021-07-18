@@ -2016,6 +2016,14 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(err);
         });
       }
+    },
+    editProduct: function editProduct(product) {
+      this.edit = true;
+      this.product.id = product.id;
+      this.product.product_id = product.id;
+      this.product.name = product.name;
+      this.product.description = product.description;
+      document.getElementById('product_category').selectedIndex = product.category_id;
     }
   }
 });

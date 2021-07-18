@@ -167,6 +167,15 @@ import axios from 'axios';
                     }).catch(err=>console.log(err))
                     
                 }
+            },
+            editProduct(product){
+                this.edit = true;
+                this.product.id = product.id;
+                this.product.product_id = product.id;
+                this.product.name = product.name;
+                this.product.description = product.description;
+                document.getElementById('product_category').selectedIndex=product.category_id;
+
             }
         }
     };
