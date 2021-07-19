@@ -115,69 +115,62 @@ class SuppliesController extends Controller
         
     }
 
-    public function storeProductApi(Request $request, Product $product)
+    public function storeProductApi(Request $request)
     {
 
-      
-       $data = [];
-            switch ($request->method()) {
-                case 'POST':
-                    try{
-                        if($request->hasFile('image')){
-                            
-                            $file = $request->file('image');
-                            $file_name = $file->getClientOriginalName();
-                            $file->move(storage_path('app/public/images/products'), $file_name);
-            
-                            $data['image'] = $file_name;
-                            $data['name'] = $request->input('name');
-                            $data['description'] = $request->input('description');
-                            $data['category_id'] = $request->input('category_id');
-            
-                      
-                            $product->insert($data);
-                       
-                        }
-                    }catch(\Exception $e){
-                            return response()->json([
-                                'message'=>$e->getMessage()
-                            ]);
-                        }
-                    break;
-        
-                case 'PUT':
-                    try{
-                        
-                        if($request->hasFile('image')){
-                            
-                            Product::findOrFail($request->input('product_id'));
-                            $file = $request->file('image');
-                            $file_name = $file->getClientOriginalName();
-                            $file->move(storage_path('app/public/images/products'), $file_name);
+        $data = [];
+        $img = $request->file('image');
+        $id = $request->input('product_id');
+        $name = $request->input('name');
+        $desc = $request->input('description');
+        $c_id = $request->input('category_id');
+        echo "<script>";
+        echo "alert($img);";
+        echo "alert($id);";
+        echo "alert($name);";
+        echo "alert($desc);";
+        echo "alert($c_id);";
+        echo "</script>";
+        try{
+            if($request->hasFile('image')){
+                
+                $file = $request->file('image');
+                $file_name = $file->getClientOriginalName();
+                $file->move(storage_path('app/public/images/products'), $file_name);
+
+               
+                //$product = $request->isMethod('put') ? Product::findOrFail($request->product_id) : new Product;
+                
+
+                /*$product->id = $request->input('product_id');
+                $product->name = $request->input('name');
+                $product->description = $request->input('description');
+                $product->category_id = $request->input('category_id');
+                $product->image = $file_name;*/
+
+                $data['image'] = $file_name;
+                $data['id'] = $request->input('product_id');
+                $data['name'] = $request->input('name');
+                $data['description'] = $request->input('description');
+                $data['category_id'] = $request->input('category_id');
 
 
-                            $data['image'] = $file_name;
-                            //$article->id = $request->input('article_id');
-                            $data['id'] = $request->input('product_id');
-                            $data['name'] = $request->input('name');
-                            $data['description'] = $request->input('description');
-                            $data['category_id'] = $request->input('category_id');
-            
-                      
-                            $product->insert($data);
-                       
-                        }
-                    }catch(\Exception $e){
-                            return response()->json([
-                                'message'=>$e->getMessage()
-                            ]);
-                        }
-                    break;
-        
-                default:
-                    // invalid request
-                    break;
+                echo "<script>";
+                echo "alert($data);";
+                echo "</script>";
+                /*if ($product->save()) {
+                    return new ProductResource($product);
+                }
+
+                return null;*/
+           
             }
+        }catch(\Exception $e){
+                return response()->json([
+                    'message'=>$e->getMessage()
+                ]);
+            }
+
         }
     
 

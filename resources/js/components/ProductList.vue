@@ -157,6 +157,9 @@ import axios from 'axios';
                     data.append('category_id', this.category_id);
                     data.append('image', this.image);
 
+                    for (var pair of data.entries()) {
+                        console.log(pair[0]+ ', ' + pair[1]); 
+                    }
                     axios.post("api/products02/new",data).then(res=>{
                         console.log("Response", res.data)
                     }).catch(err=>console.log(err))
@@ -166,13 +169,26 @@ import axios from 'axios';
                     data.append('name', this.product.name);
                     data.append('description', this.product.description);
                     data.append('category_id', this.category_id);
-                    data.append('product_id', this.product.product_id);
+                    data.append('product_id', this.product.id);
                     data.append('image', this.image);
                     
-                    console.log(this.product.product_id)
+                    for (var pair of data.entries()) {
+                        console.log(pair[0]+ ', ' + pair[1]); 
+                    }
+
                     axios.put("api/products02/new",data).then(res=>{
                         console.log("Response", res.data)
                     }).catch(err=>console.log(err))
+
+                      /*fetch('api/products02/new', {
+                        method: 'put',
+                        body: data,
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.fetchProducts();
+                    })
+                    .catch(err => console.log(err));*/
                 }
             },
             editProduct(product){
@@ -182,8 +198,9 @@ import axios from 'axios';
                 this.product.name = product.name;
                 this.product.description = product.description;
                 document.getElementById('product_category').selectedIndex=product.category_id;
+                //document.getElementById('img').value = product.image;
                 console.log(this.product.id)
-                console.log(this.product.product_id)
+                //console.log(this.image)
 
             }
         }
