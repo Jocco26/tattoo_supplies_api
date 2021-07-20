@@ -2041,38 +2041,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
         _data.append('category_id', this.category_id);
 
-        _data.append('product_id', this.product.id);
+        _data.append('product_id', this.product.id); //data.append('image', this.image);
 
-        _data.append('image', this.image);
-
-        var _iterator2 = _createForOfIteratorHelper(_data.entries()),
-            _step2;
-
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var pair = _step2.value;
-            console.log(pair[0] + ', ' + pair[1]);
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
 
         axios__WEBPACK_IMPORTED_MODULE_0___default().put("api/products02/new", _data).then(function (res) {
           console.log("Response", res.data);
         })["catch"](function (err) {
           return console.log(err);
         });
-        /*fetch('api/products02/new', {
-          method: 'put',
-          body: data,
-        })
-        .then(res => res.json())
-        .then(data => {
-          this.fetchProducts();
-        })
-        .catch(err => console.log(err));*/
       }
     },
     editProduct: function editProduct(product) {

@@ -115,23 +115,41 @@ class SuppliesController extends Controller
         
     }
 
+    public function updateProductApi(Request $request, $id)
+    {
+        $method = $request->method();
+        $img = $request->file('image');
+        //$id = $request->input('product_id');
+        $name = $request->input('name');
+        $desc = $request->input('description');
+        $c_id = $request->input('category_id');
+
+        echo "<script>";
+        echo "alert($method);";
+        //echo "alert($id);";
+        echo "alert($name);";
+        echo "alert($desc);";
+        echo "alert($c_id);";
+        echo "</script>";
+    }    
+
     public function storeProductApi(Request $request)
     {
 
-        $data = [];
+        /*$data = [];
         $img = $request->file('image');
-        $id = $request->input('product_id');
+        //$id = $request->input('product_id');
         $name = $request->input('name');
         $desc = $request->input('description');
         $c_id = $request->input('category_id');
         echo "<script>";
         echo "alert($img);";
-        echo "alert($id);";
+        //echo "alert($id);";
         echo "alert($name);";
         echo "alert($desc);";
         echo "alert($c_id);";
-        echo "</script>";
-        try{
+        echo "</script>";*/
+        try{  
             if($request->hasFile('image')){
                 
                 $file = $request->file('image');
@@ -139,32 +157,26 @@ class SuppliesController extends Controller
                 $file->move(storage_path('app/public/images/products'), $file_name);
 
                
-                //$product = $request->isMethod('put') ? Product::findOrFail($request->product_id) : new Product;
+                $product = $request->isMethod('put') ? Product::findOrFail($request->product_id) : new Product;
                 
 
-                /*$product->id = $request->input('product_id');
+                $product->id = $request->input('product_id');
                 $product->name = $request->input('name');
                 $product->description = $request->input('description');
                 $product->category_id = $request->input('category_id');
-                $product->image = $file_name;*/
+                $product->image = $file_name;
 
-                $data['image'] = $file_name;
-                $data['id'] = $request->input('product_id');
-                $data['name'] = $request->input('name');
-                $data['description'] = $request->input('description');
-                $data['category_id'] = $request->input('category_id');
+               
 
-
-                echo "<script>";
-                echo "alert($data);";
-                echo "</script>";
-                /*if ($product->save()) {
+                if ($product->save()) {
                     return new ProductResource($product);
                 }
 
-                return null;*/
+                return null;
            
             }
+
+          
         }catch(\Exception $e){
                 return response()->json([
                     'message'=>$e->getMessage()

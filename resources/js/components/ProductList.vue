@@ -170,25 +170,13 @@ import axios from 'axios';
                     data.append('description', this.product.description);
                     data.append('category_id', this.category_id);
                     data.append('product_id', this.product.id);
-                    data.append('image', this.image);
-                    
-                    for (var pair of data.entries()) {
-                        console.log(pair[0]+ ', ' + pair[1]); 
-                    }
+                    //data.append('image', this.image);
 
                     axios.put("api/products02/new",data).then(res=>{
                         console.log("Response", res.data)
                     }).catch(err=>console.log(err))
 
-                      /*fetch('api/products02/new', {
-                        method: 'put',
-                        body: data,
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        this.fetchProducts();
-                    })
-                    .catch(err => console.log(err));*/
+                   
                 }
             },
             editProduct(product){
